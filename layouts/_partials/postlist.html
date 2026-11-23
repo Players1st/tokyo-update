@@ -1,0 +1,5 @@
+<ul>
+{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a>
+ <small>{{ .Date.Format "2006-01-02" }}{{ with .Params.ward }} / {{ partial "wardname.html" . }}{{ end }}</small></li>
+{{ end }}
+</ul>
