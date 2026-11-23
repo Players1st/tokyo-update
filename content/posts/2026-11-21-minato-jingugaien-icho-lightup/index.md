@@ -7,6 +7,7 @@ ward: "minato"
 area: "外苑前・青山一丁目（北青山）"
 categories: ["event_spot"]
 tags: ["ライトアップ", "紅葉", "イチョウ並木", "神宮外苑", "外苑前"]
+og_title: "神宮外苑のイチョウ並木ライトアップ"
 source_name: "東京都 報道発表資料「光に包まれる秋の並木道 神宮外苑イチョウ並木をライトアップ」（2026年11月13日・建設局）"
 source_url: "https://www.metro.tokyo.lg.jp/information/press/2026/11/2026111301"
 sponsored: false
