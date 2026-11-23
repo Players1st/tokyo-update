@@ -1,0 +1,50 @@
+{{- /*
+  OGP / X カード用の画像を返す（1200x630 JPEG）。
+  - 記事にサムネがあれば、それを元にする
+  - og_title があれば、下部に帯を敷いて、区名と og_title を文字として重ねる
+  - サムネがなければ空を返す（呼び出し側で既定画像にフォールバック）
+  引数: ページ
+*/ -}}
+{{- $page := . }}
+{{- $out := "" }}
+{{- with partial "thumb-resource.html" $page }}
+  {{- $img := .Fill "1200x630 jpg q90" }}
+  {{- $title := $page.Params.og_title }}
+  {{- with $title }}
+    {{- $font := resources.Get "fonts/ZenMaruGothic-Bold.ttf" }}
+    {{- $band := resources.Get "images/og-band.png" }}
+    {{- /* 折り返し：最大14文字を目安に、行数を決めて均等に分ける */ -}}
+    {{- $runes := split . "" }}
+    {{- $len := len $runes }}
+    {{- $nlines := math.Ceil (div (float $len) 14) | int }}
+    {{- if lt $nlines 1 }}{{ $nlines = 1 }}{{ end }}
+    {{- $per := math.Ceil (div (float $len) (float $nlines)) | int }}
+    {{- $lines := slice }}
+    {{- $pos := 0 }}
+    {{- range seq $nlines }}
+      {{- if lt $pos $len }}
+        {{- $end := add $pos $per | int }}
+        {{- /* 行頭に句読点・閉じ括弧が来ないよう、1文字ぶん後ろへずらす */ -}}
+        {{- if and (lt $end $len) (in (slice "、" "。" "」" "』" "）" "・" "！" "？") (index $runes $end)) }}{{ $end = add $end 1 }}{{ end }}
+        {{- if gt $end $len }}{{ $end = $len }}{{ end }}
+        {{- $lines = $lines | append (delimit (first (sub $end $pos | int) (after $pos $runes)) "") }}
+        {{- $pos = $end }}
+      {{- end }}
+    {{- end }}
+    {{- $n := len $lines }}
+    {{- $pitch := 76 }}
+    {{- $ytitle := sub 630 (add 52 (mul $n $pitch)) | int }}
+    {{- $filters := slice (images.Overlay $band 0 300) }}
+    {{- with $page.Params.ward }}
+      {{- $wname := partial "termlabel.html" (dict "tax" "ward" "term" .) }}
+      {{- $filters = $filters | append (images.Text (string $wname) (dict "font" $font "color" "#ffd2bd" "size" 34 "x" 60 "y" (sub $ytitle 46))) }}
+    {{- end }}
+    {{- range $i, $l := $lines }}
+      {{- $filters = $filters | append (images.Text $l (dict "font" $font "color" "#ffffff" "size" 60 "x" 60 "y" (add $ytitle (mul $i $pitch)))) }}
+    {{- end }}
+    {{- $out = $img.Filter $filters }}
+  {{- else }}
+    {{- $out = $img }}
+  {{- end }}
+{{- end }}
+{{- return $out -}}
