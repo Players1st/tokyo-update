@@ -1,7 +1,8 @@
 # 毎朝の自動記事生成：記事を書く → サムネを作る → 機械チェック → プルリクエストを出す。
 # 公開してよいかは、Hiro がプルリクエストをマージするかどうかで決まる（main には直接 push しない）。
-# 今は手動実行のみ。動作が安定したら、下の schedule を有効にする（cron は UTC。毎朝 JST 4:00 = 前日の UTC 19:00）。
+# 毎朝 JST 4:00（cron は UTC なので、前日の UTC 19:00）に自動実行する。手動実行（workflow_dispatch）もできる。
 # GitHub のスケジュール実行は、混雑時に数分〜数十分遅れることがある。
+# 公開リポジトリでは、60日間リポジトリに動きがないと、スケジュール実行が自動で止まる（毎朝 PR が出ていれば通常は問題ない）。
 name: Daily article
 
 on:
@@ -13,8 +14,8 @@ on:
       hint:
         description: "区やテーマの指定（任意。例: 世田谷区、グルメ）"
         default: ""
-  # schedule:
-  #   - cron: "0 19 * * *"
+  schedule:
+    - cron: "0 19 * * *"
 
 permissions:
   contents: write        # ブランチを push する
@@ -66,7 +67,7 @@ jobs:
           prompt: |
             `.github/daily-article-task.md` を読み、その指示どおりに記事を作ってください。
             - 今日の日付と時刻: ${{ steps.prep.outputs.now }}（日付は ${{ steps.prep.outputs.today }}）
-            - 作る記事の本数: ${{ inputs.count }}
+            - 作る記事の本数: ${{ inputs.count || '1' }}
             - 区やテーマの指定: ${{ inputs.hint || 'なし（23区全体から選ぶ）' }}
           claude_args: >-
             --model ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
