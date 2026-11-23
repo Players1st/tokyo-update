@@ -55,13 +55,18 @@ def x_post_text(slug: str, fm: dict) -> str:
     if not isinstance(tags, list):
         tags = []
     hashtags = []
+    ward = ward_name(fm.get("ward", ""))  # 区名のハッシュタグを先頭に（区ごとにまとめて探せるように）
+    first = re.sub(r"[\s#＃]+", "", ward)
+    if first and first != fm.get("ward", ""):
+        hashtags.append("#" + first)
+    n_ward = len(hashtags)
     for t in tags:
         t = re.sub(r"[\s#＃]+", "", str(t))
         if t and "#" + t not in hashtags:
             hashtags.append("#" + t)
     parts = [fm.get("title", slug), "%s/posts/%s/" % (SITE_URL, slug)]
     if hashtags:
-        parts.append(" ".join(hashtags[:MAX_HASHTAGS]))
+        parts.append(" ".join(hashtags[:n_ward + MAX_HASHTAGS]))
     return "\n\n".join(parts)
 
 
