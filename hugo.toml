@@ -1,6 +1,6 @@
 baseURL = "https://tokyo-update.com/"
 title = "Tokyo Update"
-languageCode = "ja"
+locale = "ja"
 defaultContentLanguage = "ja"
 timeZone = "Asia/Tokyo"
 hasCJKLanguage = true
