@@ -26,3 +26,14 @@ python3 scripts/validate_post.py --help
 ```
 
 エラーがあれば終了コード 1。フロントマター、`ward` / `categories` の許可値、`og_title`、サムネ（1200×630）、「要確認」の件数などを確認する。
+
+## サムネ画像の生成
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   # 初回のみ
+set -a; source .env.local; set +a    # GEMINI_API_KEY（.env.local は git に入れない）と GEMINI_IMAGE_MODEL を読み込む
+.venv/bin/python scripts/generate_thumbnail.py samples/thumbnails/<スラッグ>.yaml --dry-run   # API を呼ばずに確認
+.venv/bin/python scripts/generate_thumbnail.py samples/thumbnails/<スラッグ>.yaml             # 生成（1200×630 で記事フォルダに保存）
+```
+
+`GEMINI_IMAGE_MODEL` は GitHub の Variables、`GEMINI_API_KEY` は Secrets から読む（コードには書かない）。
