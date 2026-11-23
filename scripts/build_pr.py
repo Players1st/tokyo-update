@@ -2,7 +2,7 @@
 """毎朝のパイプラインのプルリクエスト本文（と題名）を作る。標準ライブラリのみ。
 
 入力（.work/ 以下）:
-  result.json              記事のスラッグ一覧（記事生成の工程が書く）
+  result.json              記事のスラッグと、確認できなかった項目 unverified（記事生成の工程が書く）
   validate.json            validate_post.py --json の出力
   thumbnails/<スラッグ>.yaml  サムネ用 YAML（intent_ja / omitted_ja を読む）
 出力:
@@ -23,7 +23,7 @@ import validate_post as vp  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / ".work"
-MAX_CHECK_LINES = 8
+MAX_CHECK_LINES = 10
 
 
 def ward_name(slug: str) -> str:
@@ -33,18 +33,6 @@ def ward_name(slug: str) -> str:
         if m:
             wards[m.group(1) or m.group(2)] = m.group(3)
     return wards.get(slug, slug)
-
-
-def check_lines(body: str) -> list:
-    """「要確認」を含む行を、短く整えて返す。"""
-    lines = []
-    for raw in body.splitlines():
-        if "要確認" not in raw:
-            continue
-        text = re.sub(r"[*_`>#|]", "", raw).strip(" -・")
-        text = re.sub(r"\s+", " ", text)
-        lines.append(text if len(text) <= 110 else text[:108] + "…")
-    return lines
 
 
 def load_thumb_yaml(slug: str) -> dict:
@@ -60,6 +48,7 @@ def load_thumb_yaml(slug: str) -> dict:
 def main() -> int:
     result = json.loads((WORK / "result.json").read_text(encoding="utf-8"))
     slugs = [a["slug"] for a in result.get("articles", [])]
+    unverified_by_slug = {a["slug"]: a.get("unverified", []) for a in result.get("articles", [])}
     validate = {}
     vpath = WORK / "validate.json"
     if vpath.is_file():
@@ -81,12 +70,12 @@ def main() -> int:
         spec = load_thumb_yaml(slug)
 
         lines = ["## %s" % title, "- 対象の区: %s" % ward, ""]
-        checks = check_lines(body)
-        lines.append("### 要確認（%d 件）" % len(checks))
+        checks = unverified_by_slug.get(slug, [])
+        lines.append("### 要確認（%d 件。記事の本文には載せていません）" % len(checks))
         if checks:
             lines += ["- " + c for c in checks[:MAX_CHECK_LINES]]
             if len(checks) > MAX_CHECK_LINES:
-                lines.append("- …ほか %d 件（記事本文を参照）" % (len(checks) - MAX_CHECK_LINES))
+                lines.append("- …ほか %d 件" % (len(checks) - MAX_CHECK_LINES))
         else:
             lines.append("- なし")
         lines.append("")

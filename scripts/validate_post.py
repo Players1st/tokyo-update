@@ -205,6 +205,8 @@ def validate(post_dir: Path, wards: set, categories: set, allow_missing_image: b
 
     # 本文
     result["needs_check"] = body.count("要確認")
+    if result["needs_check"]:
+        warnings.append("本文に「要確認」が %d 箇所あります。確認できなかった点は本文に書かず、PR 本文で報告する方針です" % result["needs_check"])
     if "{{ARTICLE_URL}}" in body or "X投稿案" in body:
         warnings.append("本文に X 投稿案（または {{ARTICLE_URL}}）が残っています。記事には不要です")
     if has_broken_bold(body):
@@ -255,7 +257,7 @@ def main(argv=None) -> int:
     else:
         for r in results:
             status = "NG" if r["errors"] else "OK"
-            print("[%s] %s  （要確認: %d 件）" % (status, r["slug"], r["needs_check"]))
+            print("[%s] %s" % (status, r["slug"]))
             for e in r["errors"]:
                 print("   エラー: " + e)
             for w in r["warnings"]:
