@@ -4,3 +4,12 @@ languageCode = "ja"
 defaultContentLanguage = "ja"
 timeZone = "Asia/Tokyo"
 hasCJKLanguage = true
+
+[taxonomies]
+ward = "ward"
+area = "area"
+category = "categories"
+tag = "tags"
+
+[params]
+description = "東京23区の暮らし・グルメ・街の動きを伝えるローカルメディア"

@@ -1,0 +1,6 @@
+{{ define "main" }}<article><h1>{{ .Title }}</h1>
+<p>{{ .Date.Format "2006-01-02" }}{{ with .Params.ward }} / <a href="{{ printf "/ward/%s/" . | relURL }}">{{ partial "wardname.html" . }}</a>{{ end }}{{ with .Params.area }} / {{ . }}{{ end }}
+{{ range .Params.categories }} / {{ with index hugo.Data.categories . }}{{ . }}{{ else }}{{ . }}{{ end }}{{ end }}</p>
+{{ .Content }}
+<hr><p>出典：{{ if .Params.source_url }}<a href="{{ .Params.source_url }}" rel="noopener">{{ .Params.source_name }}</a>{{ else }}{{ .Params.source_name }}{{ end }}</p>
+{{ if .Params.sponsored }}<p><strong>PR</strong></p>{{ end }}</article>{{ end }}

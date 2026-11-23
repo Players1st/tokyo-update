@@ -1,0 +1,5 @@
+# categories スラッグ → 表示名
+gourmet = "グルメ"
+life = "暮らし"
+event_spot = "イベント・スポット"
+weather_disaster = "天気・防災"

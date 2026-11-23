@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+{{ range .AlternativeOutputFormats }}{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}{{ end }}
+</head><body>
+<header><a href="{{ "/" | relURL }}">{{ site.Title }}</a></header>
+<main>{{ block "main" . }}{{ end }}</main>
+</body></html>
