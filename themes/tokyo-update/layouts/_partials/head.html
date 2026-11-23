@@ -14,7 +14,7 @@
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:locale" content="ja_JP">
 {{- $ogimg := "" }}
-{{- with partial "thumb-resource.html" . }}{{ $ogimg = (.Fill "1200x630 webp q85").Permalink }}
+{{- with partial "og-image.html" . }}{{ $ogimg = .Permalink }}
 {{- else }}{{ if fileExists "static/images/ogp-default.png" }}{{ $ogimg = "images/ogp-default.png" | absURL }}{{ end }}{{ end }}
 {{- if $ogimg }}
 <meta property="og:image" content="{{ $ogimg }}">
