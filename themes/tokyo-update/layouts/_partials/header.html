@@ -1,6 +1,9 @@
 <header class="site-header">
   <div class="container header-inner">
-    <a class="logo" href="{{ "/" | relURL }}"><span class="logo-mark" aria-hidden="true">●</span>{{ site.Title }}</a>
+    <a class="logo" href="{{ "/" | relURL }}" aria-label="{{ site.Title }} トップへ">
+      {{- with resources.Get "images/logo_long.png" }}{{ $l := (.Crop "1300x590 center").Resize "x132 webp q90" }}<img src="{{ $l.RelPermalink }}" width="{{ $l.Width }}" height="{{ $l.Height }}" alt="{{ site.Title }}">
+      {{- else }}<span class="logo-mark" aria-hidden="true">●</span>{{ site.Title }}{{ end -}}
+    </a>
     <nav class="nav" aria-label="メイン">
       <a href="{{ "/posts/" | relURL }}">記事</a>
       <a href="{{ "/ward/" | relURL }}">区から探す</a>
