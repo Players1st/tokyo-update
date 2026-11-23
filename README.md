@@ -25,7 +25,7 @@ python3 scripts/validate_post.py content/posts/<スラッグ>   # 指定した�
 python3 scripts/validate_post.py --help
 ```
 
-エラーがあれば終了コード 1。フロントマター、`ward` / `categories` の許可値、`og_title`、サムネ（1200×630）、「要確認」の件数などを確認する。
+エラーがあれば終了コード 1。フロントマター、`ward` / `categories` の許可値、`og_title`、サムネ（1200×630）、本文に「要確認」が残っていないか、などを確認する。
 
 ## サムネ画像の生成
 
