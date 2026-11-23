@@ -45,6 +45,31 @@ def load_thumb_yaml(slug: str) -> dict:
         return {}
 
 
+SITE_URL = "https://tokyo-update.com"
+MAX_HASHTAGS = 3
+
+
+def x_post_text(slug: str, fm: dict) -> str:
+    """X 投稿文を機械的に作る（AI は使わない）。題名＋記事 URL＋タグ由来のハッシュタグ。"""
+    tags = fm.get("tags", [])
+    if not isinstance(tags, list):
+        tags = []
+    hashtags = []
+    ward = ward_name(fm.get("ward", ""))  # 区名のハッシュタグを先頭に（区ごとにまとめて探せるように）
+    first = re.sub(r"[\s#＃]+", "", ward)
+    if first and first != fm.get("ward", ""):
+        hashtags.append("#" + first)
+    n_ward = len(hashtags)
+    for t in tags:
+        t = re.sub(r"[\s#＃]+", "", str(t))
+        if t and "#" + t not in hashtags:
+            hashtags.append("#" + t)
+    parts = [fm.get("title", slug), "%s/posts/%s/" % (SITE_URL, slug)]
+    if hashtags:
+        parts.append(" ".join(hashtags[:n_ward + MAX_HASHTAGS]))
+    return "\n\n".join(parts)
+
+
 def main() -> int:
     result = json.loads((WORK / "result.json").read_text(encoding="utf-8"))
     slugs = [a["slug"] for a in result.get("articles", [])]
@@ -88,6 +113,8 @@ def main() -> int:
         else:
             lines.append("- **画像なし**（生成に失敗しました。記事だけの PR です。Actions のログを確認してください）")
         lines.append("")
+        lines.append("### X 投稿文（手動投稿用。コピーして使えます）")
+        lines += ["```", x_post_text(slug, fm), "```", ""]
         lines.append("### 機械チェック: %s" % ("**NG**" if v["errors"] else "OK"))
         lines += ["- エラー: " + e for e in v["errors"]]
         lines += ["- 警告: " + w for w in v["warnings"]]
