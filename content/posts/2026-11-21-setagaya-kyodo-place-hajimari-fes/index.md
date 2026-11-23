@@ -7,6 +7,7 @@ ward: "setagaya"
 area: "世田谷・松陰神社前（世田谷区役所）"
 categories: ["event_spot"]
 tags: ["新施設", "世田谷区役所", "イベント", "マルシェ", "松陰神社前"]
+og_title: "区役所新庁舎に交流拠点「協働プレイス」誕生"
 source_name: "世田谷区 区のおしらせ「せたがや」令和8年10月25日 本庁舎2期棟完成特集号（4面）"
 source_url: "https://www.city.setagaya.lg.jp/kuhou/oshirase20261025s/p04.html"
 sponsored: false
