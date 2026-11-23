@@ -1,0 +1,25 @@
+# Hugo を Docker で動かす（ローカルに Hugo / Go を入れない）
+# バージョンは GitHub Actions と揃えること（HUGO_VERSION を .env で上書き可）
+services:
+  hugo:
+    image: ghcr.io/gohugoio/hugo:${HUGO_VERSION:-v0.170.1}
+    working_dir: /project
+    volumes:
+      - .:/project
+    ports:
+      - "1313:1313"
+    command:
+      - server
+      - --bind=0.0.0.0
+      - --baseURL=http://localhost:1313/
+      - --appendPort=false
+      - --disableFastRender
+      - --renderToMemory
+  # ビルド確認用: docker compose run --rm build
+  build:
+    image: ghcr.io/gohugoio/hugo:${HUGO_VERSION:-v0.170.1}
+    working_dir: /project
+    volumes:
+      - .:/project
+    command: ["--gc", "--minify"]
+    profiles: ["tools"]
