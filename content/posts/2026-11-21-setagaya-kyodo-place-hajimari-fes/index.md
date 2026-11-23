@@ -2,7 +2,7 @@
 title: "【世田谷区】区役所新庁舎に交流拠点「協働プレイス」が誕生！オープン記念「せたがやはじまりフェス」は11/23まで"
 date: 2026-11-21T11:45:00+09:00
 lastmod: 2026-11-21T11:45:00+09:00
-draft: false
+draft: true
 ward: "setagaya"
 area: "世田谷・松陰神社前（世田谷区役所）"
 categories: ["event_spot"]
