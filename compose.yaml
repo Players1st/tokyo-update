@@ -14,6 +14,7 @@ services:
       - --baseURL=http://localhost:1313/
       - --appendPort=false
       - --disableFastRender
+      - --renderToMemory
   # ビルド確認用: docker compose run --rm build
   build:
     image: ghcr.io/gohugoio/hugo:${HUGO_VERSION:-v0.170.1}
