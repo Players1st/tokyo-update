@@ -11,4 +11,8 @@ docker compose down         # 停止
 docker compose run --rm build   # 本番ビルドの確認（public/ に出力）
 ```
 
-Hugo のバージョンは `compose.yaml` の `HUGO_VERSION`（現在 v0.170.1）。GitHub Actions のバージョンと揃えること。
+Hugo のバージョンは `compose.yaml` の `HUGO_VERSION`（現在 v0.170.1）。`.github/workflows/deploy.yml` の `HUGO_VERSION` と必ず揃えること。
+
+## 公開
+
+`main` にマージすると、GitHub Actions（`.github/workflows/deploy.yml`）が Hugo をビルドして GitHub Pages に公開する。プルリクエストではビルド確認のみ行う。下書き（`draft: true`）は公開されない。

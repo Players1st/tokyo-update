@@ -1,5 +1,5 @@
 # Hugo を Docker で動かす（ローカルに Hugo / Go を入れない）
-# バージョンは GitHub Actions と揃えること（HUGO_VERSION を .env で上書き可）
+# バージョンは .github/workflows/deploy.yml の HUGO_VERSION（v を除いた値）と必ず揃えること（HUGO_VERSION を .env で上書き可）
 services:
   hugo:
     image: ghcr.io/gohugoio/hugo:${HUGO_VERSION:-v0.170.1}
