@@ -4,6 +4,11 @@ locale = "ja"
 defaultContentLanguage = "ja"
 timeZone = "Asia/Tokyo"
 hasCJKLanguage = true
+theme = "tokyo-update"
+summaryLength = 90
+
+[pagination]
+pagerSize = 6
 
 [taxonomies]
 ward = "ward"

@@ -1,0 +1,15 @@
+{{- /* 記事カード。引数: ページ */ -}}
+{{- $p := . }}
+<article class="card">
+  <a class="card-link" href="{{ $p.RelPermalink }}">
+    <div class="card-thumb">
+      {{- with partial "thumb-resource.html" $p }}{{ $s := .Fill "640x336 webp q80" }}<img src="{{ $s.RelPermalink }}" width="{{ $s.Width }}" height="{{ $s.Height }}" alt="" loading="lazy">
+      {{- else }}<div class="thumb-fallback" aria-hidden="true"></div>{{ end }}
+    </div>
+    <div class="card-body">
+      <p class="card-meta">{{ partial "badges.html" $p }}<time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "2006年1月2日" }}</time></p>
+      <h3 class="card-title">{{ $p.Title }}</h3>
+      <p class="card-summary">{{ $p.Summary | plainify | truncate 70 }}</p>
+    </div>
+  </a>
+</article>

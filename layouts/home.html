@@ -1,4 +1,0 @@
-{{ define "main" }}<h1>{{ site.Title }}</h1>
-<p>{{ site.Params.description }}</p>
-<h2>新着記事</h2>{{ partial "postlist.html" (where site.RegularPages "Section" "posts") }}
-<p><a href="{{ "/ward/" | relURL }}">区から探す</a></p>{{ end }}

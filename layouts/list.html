@@ -1,2 +1,0 @@
-{{ define "main" }}<h1>{{ if eq .Data.Plural "ward" }}{{ partial "wardname.html" .Data.Term }}{{ else }}{{ .Title }}{{ end }}</h1>
-{{ partial "postlist.html" .Pages }}{{ end }}

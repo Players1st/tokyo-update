@@ -1,0 +1,7 @@
+{{- with .Paginator }}{{ if gt .TotalPages 1 }}
+<nav class="pager" aria-label="ページ送り">
+  {{ if .HasPrev }}<a class="pager-link" href="{{ .Prev.URL }}">‹ 前へ</a>{{ end }}
+  <span class="pager-now">{{ .PageNumber }} / {{ .TotalPages }}</span>
+  {{ if .HasNext }}<a class="pager-link" href="{{ .Next.URL }}">次へ ›</a>{{ end }}
+</nav>
+{{ end }}{{ end -}}

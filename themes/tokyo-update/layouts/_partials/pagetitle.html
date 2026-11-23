@@ -1,0 +1,4 @@
+{{- /* ページタイトル。ward / categories は日本語名に変換 */ -}}
+{{- if and .Data.Term (eq .Data.Plural "ward") }}{{ partial "termlabel.html" (dict "tax" "ward" "term" .Data.Term) }}
+{{- else if and .Data.Term (eq .Data.Plural "categories") }}{{ partial "termlabel.html" (dict "tax" "categories" "term" .Data.Term) }}
+{{- else }}{{ .Title }}{{ end -}}

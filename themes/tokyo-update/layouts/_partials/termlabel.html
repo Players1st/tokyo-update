@@ -1,0 +1,5 @@
+{{- /* 引数: dict "tax" "ward|categories|..." "term" "スラッグ" */ -}}
+{{- $t := .term }}
+{{- if eq .tax "ward" }}{{ with index hugo.Data.wards $t }}{{ . }}{{ else }}{{ $t }}{{ end }}
+{{- else if eq .tax "categories" }}{{ with index hugo.Data.categories $t }}{{ . }}{{ else }}{{ $t }}{{ end }}
+{{- else }}{{ $t }}{{ end -}}

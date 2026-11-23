@@ -1,0 +1,2 @@
+{{- range .Params.categories }}<span class="badge badge-{{ . }}">{{ partial "termlabel.html" (dict "tax" "categories" "term" .) }}</span>{{ end -}}
+{{- with .Params.ward }}<span class="badge badge-ward">{{ partial "termlabel.html" (dict "tax" "ward" "term" .) }}</span>{{ end -}}
