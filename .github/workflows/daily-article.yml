@@ -1,6 +1,7 @@
 # 毎朝の自動記事生成：記事を書く → サムネを作る → 機械チェック → プルリクエストを出す。
 # 公開してよいかは、Hiro がプルリクエストをマージするかどうかで決まる（main には直接 push しない）。
-# 今は手動実行のみ。動作が安定したら、下の schedule を有効にする（cron は UTC。JST 6:00 = UTC 21:00 の前日）。
+# 今は手動実行のみ。動作が安定したら、下の schedule を有効にする（cron は UTC。毎朝 JST 4:00 = 前日の UTC 19:00）。
+# GitHub のスケジュール実行は、混雑時に数分〜数十分遅れることがある。
 name: Daily article
 
 on:
@@ -13,7 +14,7 @@ on:
         description: "区やテーマの指定（任意。例: 世田谷区、グルメ）"
         default: ""
   # schedule:
-  #   - cron: "0 21 * * *"
+  #   - cron: "0 19 * * *"
 
 permissions:
   contents: write        # ブランチを push する
