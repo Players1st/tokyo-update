@@ -15,6 +15,7 @@ services:
       - --appendPort=false
       - --disableFastRender
       - --renderToMemory
+      - --buildDrafts
   # ビルド確認用: docker compose run --rm build
   build:
     image: ghcr.io/gohugoio/hugo:${HUGO_VERSION:-v0.170.1}

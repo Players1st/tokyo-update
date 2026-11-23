@@ -1,3 +1,0 @@
-{{ define "main" }}<h1>{{ .Title }}</h1><ul>
-{{ range .Data.Terms.Alphabetical }}<li><a href="{{ .Page.RelPermalink }}">{{ if eq $.Data.Plural "ward" }}{{ partial "wardname.html" .Page.Data.Term }}{{ else }}{{ .Page.Title }}{{ end }}</a> ({{ .Count }})</li>{{ end }}
-</ul>{{ end }}

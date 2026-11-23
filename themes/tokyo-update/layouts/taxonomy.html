@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="container">
+  <header class="page-head">
+    <p class="page-eyebrow">{{ if eq .Data.Plural "ward" }}BY WARD{{ else if eq .Data.Plural "categories" }}BY CATEGORY{{ else }}INDEX{{ end }}</p>
+    <h1 class="page-title">{{ if eq .Data.Plural "ward" }}区から探す{{ else if eq .Data.Plural "categories" }}カテゴリーから探す{{ else }}{{ .Title }}{{ end }}</h1>
+  </header>
+  {{ partial "chips.html" (dict "tax" .Data.Plural "items" .Data.Terms) }}
+</div>
+{{ end }}

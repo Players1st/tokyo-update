@@ -1,0 +1,2 @@
+{{- /* ページバンドル内の最初の画像を返す（なければ空） */ -}}
+{{- with .Resources.ByType "image" }}{{ with index . 0 }}{{ return . }}{{ end }}{{ end -}}
