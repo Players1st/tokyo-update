@@ -4,6 +4,9 @@
 {{ partial "head.html" . }}
 </head>
 <body>
+{{- with site.Params.gtmId }}{{ if hugo.IsProduction }}
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ . }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{{- end }}{{ end }}
 {{ partial "header.html" . }}
 <main class="main">
 {{ block "main" . }}{{ end }}
