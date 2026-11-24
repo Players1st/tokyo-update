@@ -1,0 +1,75 @@
+# ネタ探しだけの検証用ワークフロー（記事は作らない）。手動実行のみ。
+# 結果は、実行の「概要」（Summary）と、成果物（Artifacts）の topics.md / topics.json で見る。
+# プルリクエストも、コミットも、作らない。
+name: Explore topics
+
+on:
+  workflow_dispatch:
+    inputs:
+      genre:
+        description: "ジャンル（all / gourmet / beauty_fitness / food_event / music_event）"
+        default: "all"
+      ward:
+        description: "区の指定（任意。例: 世田谷区、渋谷区。空なら23区全体）"
+        default: ""
+
+permissions:
+  contents: read
+  id-token: write        # claude-code-action が要求する
+
+concurrency:
+  group: explore-topics
+  cancel-in-progress: false
+
+env:
+  TZ: Asia/Tokyo
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  explore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Prepare
+        id: prep
+        run: |
+          mkdir -p .work
+          echo "now=$(date '+%Y-%m-%d %H:%M (JST)')" >> "$GITHUB_OUTPUT"
+
+      # ANTHROPIC_API_KEY はこの工程にだけ渡す。使えるツールは、Web 検索・取得と、.work/ への書き込みだけ。
+      - name: Explore
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            `.github/explore-task.md` を読み、その指示どおりに、記事のネタ探しをしてください（記事は書かない）。
+            - 今日の日付と時刻: ${{ steps.prep.outputs.now }}
+            - ジャンル指定: ${{ inputs.genre || 'all' }}
+            - 区の指定: ${{ inputs.ward || 'なし（23区全体）' }}
+          claude_args: >-
+            --model ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
+            --max-turns 100
+            --allowedTools "WebSearch,WebFetch,Read,Glob,Grep,Write(.work/**),Edit(.work/**)"
+
+      - name: Render result
+        run: |
+          if [ ! -f .work/topics.json ]; then
+            echo "::error::結果（.work/topics.json）がありません"; exit 1
+          fi
+          python3 scripts/render_topics.py > .work/topics.md
+          cat .work/topics.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload result
+        uses: actions/upload-artifact@v7
+        with:
+          name: topics
+          path: |
+            .work/topics.md
+            .work/topics.json
