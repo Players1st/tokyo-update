@@ -1,0 +1,50 @@
+name: 有料プランの注文
+description: 有料プランの記事掲載の注文を記録する（入金確認後に作る）
+title: "[有料] 店舗名・団体名 / 公開希望日"
+labels: ["paid-order"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        入金を確認してから作ってください。このリポジトリは公開なので、**メールアドレス・電話番号などの連絡先は、ここに書かないでください**（連絡先は、メールのやり取りの側にだけ残します）。
+        作ったあと、Actions の「Paid article」を、この issue の番号を指定して実行します。
+  - type: input
+    id: name
+    attributes:
+      label: お名前（店舗名・団体名）
+    validations:
+      required: true
+  - type: dropdown
+    id: plan
+    attributes:
+      label: プラン
+      options:
+        - スポットプラン（3,300円 / 1回）
+        - 月額プラン（5,500円 / 月2回まで）
+    validations:
+      required: true
+  - type: input
+    id: publish_date
+    attributes:
+      label: 公開希望日
+      description: "YYYY-MM-DD の形で書く（朝7:00に公開）。例: 2026-12-01"
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: 掲載したい内容のメモ・参考URL
+      description: お客様から受け取ったメモを、そのまま貼る。公式サイトや SNS の URL があれば、必ず入れる。
+    validations:
+      required: true
+  - type: checkboxes
+    id: paid
+    attributes:
+      label: 入金確認
+      options:
+        - label: Stripe で入金を確認した
+          required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 備考

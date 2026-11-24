@@ -70,7 +70,18 @@ def x_post_text(slug: str, fm: dict) -> str:
     return "\n\n".join(parts)
 
 
+def load_order() -> dict:
+    p = WORK / "order.json"
+    if not p.is_file():
+        return {}
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except ValueError:
+        return {}
+
+
 def main() -> int:
+    order = load_order()  # 有料プランの注文があれば、有料記事用の PR にする
     result = json.loads((WORK / "result.json").read_text(encoding="utf-8"))
     slugs = [a["slug"] for a in result.get("articles", [])]
     unverified_by_slug = {a["slug"]: a.get("unverified", []) for a in result.get("articles", [])}
@@ -94,7 +105,14 @@ def main() -> int:
         has_image = (post_dir / (slug + ".png")).is_file()
         spec = load_thumb_yaml(slug)
 
-        lines = ["## %s" % title, "- 対象の区: %s" % ward, ""]
+        lines = ["## %s" % title, "- 対象の区: %s" % ward]
+        if order:
+            lines += [
+                "- **有料掲載（PR）**: 注文 #%s（%s）" % (order.get("issue_number"), order.get("name", "")),
+                "- プラン: %s" % order.get("plan", ""),
+                "- 公開日時: %s（マージ後、この日時の朝の自動ビルドで公開されます）" % order.get("publish_datetime", ""),
+            ]
+        lines.append("")
         checks = unverified_by_slug.get(slug, [])
         lines.append("### 要確認（%d 件。記事の本文には載せていません）" % len(checks))
         if checks:
@@ -120,11 +138,17 @@ def main() -> int:
         lines += ["- 警告: " + w for w in v["warnings"]]
         sections.append("\n".join(lines))
 
-    if len(slugs) == 1:
+    if order and len(slugs) == 1:
+        title = "【有料】%s（自動生成）" % titles[0]
+    elif len(slugs) == 1:
         title = "%s（自動生成）" % titles[0]
     else:
         title = "毎朝の記事 %d 本（自動生成）" % len(slugs)
-    footer = ["---", "公開してよいと判断したら、マージしてください（マージで自動公開されます）。"]
+    if order:
+        footer = ["---", "公開してよいと判断したら、マージしてください（公開日時の朝の自動ビルドで公開されます）。",
+                  "注文の issue: #%s。公開後3日以内の修正は、issue にコメントして、ワークフローを再実行します。" % order.get("issue_number")]
+    else:
+        footer = ["---", "公開してよいと判断したら、マージしてください（マージで自動公開されます）。"]
     if has_errors:
         footer.insert(1, "⚠ 機械チェックでエラーがあるため、ドラフトの PR にしています。")
     body_md = "\n\n".join(sections + ["\n".join(footer)]) + "\n"
