@@ -242,6 +242,7 @@ def main(argv=None) -> int:
     ap.add_argument("paths", nargs="*", help="記事フォルダ（省略時は draft: false の全記事）")
     ap.add_argument("--all", action="store_true", help="下書きも含めて全記事をチェックする")
     ap.add_argument("--allow-missing-image", action="store_true", help="画像がない場合をエラーでなく警告にする")
+    ap.add_argument("--require-sponsored", action="store_true", help="sponsored: true でない記事をエラーにする（有料記事用）")
     ap.add_argument("--json", action="store_true", help="結果を JSON で出力する")
     args = ap.parse_args(argv)
 
@@ -250,6 +251,14 @@ def main(argv=None) -> int:
     targets = collect_targets(args.paths, args.all)
 
     results = [validate(t, wards, categories, args.allow_missing_image) for t in targets]
+    if args.require_sponsored:
+        for t, r in zip(targets, results):
+            try:
+                fm, _ = parse_post(t / "index.md")
+            except (ValueError, OSError):
+                continue
+            if fm.get("sponsored") is not True:
+                r["errors"].append("有料記事なのに sponsored が true になっていません")
     failed = any(r["errors"] for r in results)
 
     if args.json:
