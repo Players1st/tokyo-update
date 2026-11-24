@@ -27,7 +27,7 @@ a{color:var(--accent-dark)}
 .nav a:hover{border-color:var(--accent)}
 .site-footer{margin-top:72px;padding:36px 0 44px;background:#f1eadc;color:var(--muted);font-size:.88rem;text-align:center}
 .footer-lead{margin:0 0 12px}
-.footer-nav{display:flex;gap:20px;justify-content:center;margin-bottom:12px}
+.footer-nav{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:12px}
 .footer-nav a{color:var(--ink)}
 .copy{margin:0;font-size:.8rem}
 
