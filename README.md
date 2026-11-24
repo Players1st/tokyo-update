@@ -17,6 +17,13 @@ Hugo のバージョンは `compose.yaml` の `HUGO_VERSION`（現在 v0.170.1�
 
 `main` にマージすると、GitHub Actions（`.github/workflows/deploy.yml`）が Hugo をビルドして GitHub Pages に公開する。プルリクエストではビルド確認のみ行う。下書き（`draft: true`）は公開されない。
 
+### 公開日時を指定する（未来の日時の記事）
+記事の `date` を未来の日時にしておくと、その日時までは公開されない（Hugo は未来の日時の記事をビルドしない）。先にマージしておけば、毎朝 JST 7:05 の自動ビルド（`deploy.yml` の `schedule`）で、公開日時を過ぎた記事が公開される。
+
+- 朝7:00に公開したい記事は、`date` を `YYYY-MM-DDT07:00:00+09:00` にする（公開は 7:05 ごろ）。
+- 自動ビルドが抜けたときは、GitHub の Actions で「Build and deploy」を手動実行（Run workflow）する。
+- 日時はすべて日本時間（`+09:00`）。
+
 ## 記事のチェック
 
 ```sh

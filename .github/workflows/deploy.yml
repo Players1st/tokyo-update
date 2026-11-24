@@ -1,5 +1,8 @@
 # main へのマージで Hugo をビルドし、GitHub Pages に公開する。
 # プルリクエストでは、ビルドが通るかの確認だけを行う（公開はしない）。
+# 毎朝 JST 7:05（UTC 22:05）にもビルドし直す。Hugo は未来の日時の記事をビルドしないため、
+# 先にマージしておいた記事が、公開日時（例: 7:00）を過ぎたあとに公開される。
+# 毎時0分は混み合って実行が抜けることがあるので、5分ずらしている。抜けたときは手動実行（workflow_dispatch）。
 name: Build and deploy
 
 env:
@@ -11,6 +14,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "5 22 * * *"
   workflow_dispatch:
 
 permissions:
