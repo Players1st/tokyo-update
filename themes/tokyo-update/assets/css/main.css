@@ -173,3 +173,7 @@ a{color:var(--accent-dark)}
 .plan-callout-lead{margin:0 0 4px;font-family:var(--font-head);font-size:1.2rem;font-weight:700}
 .plan-callout-sub{margin:0 0 14px;color:var(--muted)}
 .plan-callout-sub strong{margin:0 .2em;color:var(--accent-dark);font-size:1.1rem}
+.plan-icons{list-style:none;margin:0 0 14px;padding:0;display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+.plan-icons li{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.72rem;font-weight:700;color:var(--accent-dark)}
+.plan-icons svg{width:42px;height:42px;fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:640px){.plan-icons{gap:16px}.plan-icons svg{width:36px;height:36px}}
