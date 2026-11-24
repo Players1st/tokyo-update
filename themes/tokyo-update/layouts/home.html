@@ -20,7 +20,7 @@
             {{- else }}<div class="thumb-fallback" aria-hidden="true"></div>{{ end }}
           </div>
           <div class="feature-body">
-            <p class="card-meta">{{ partial "badges.html" $first }}<time datetime="{{ $first.Date.Format "2006-01-02" }}">{{ $first.Date.Format "2006年1月2日" }}</time></p>
+            <p class="card-meta">{{ partial "badges.html" $first }}{{ if $first.Params.sponsored }}<span class="pr">PR</span>{{ end }}<time datetime="{{ $first.Date.Format "2006-01-02" }}">{{ $first.Date.Format "2006年1月2日" }}</time></p>
             <h3 class="feature-title">{{ $first.Title }}</h3>
             <p class="card-summary">{{ $first.Summary | plainify | truncate 110 }}</p>
           </div>
