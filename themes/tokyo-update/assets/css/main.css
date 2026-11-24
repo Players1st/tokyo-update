@@ -169,3 +169,7 @@ a{color:var(--accent-dark)}
 .plan-banner p{margin:0 0 4px}
 .plan-banner a{font-weight:700}
 @media (max-width:640px){.plan-cards{grid-template-columns:1fr}.plan-lead{font-size:1.1rem}}
+.plan-callout{margin:40px 0 0;padding:24px 22px;background:var(--accent-soft);border-radius:var(--radius);text-align:center}
+.plan-callout-lead{margin:0 0 4px;font-family:var(--font-head);font-size:1.2rem;font-weight:700}
+.plan-callout-sub{margin:0 0 14px;color:var(--muted)}
+.plan-callout-sub strong{margin:0 .2em;color:var(--accent-dark);font-size:1.1rem}

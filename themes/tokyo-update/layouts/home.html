@@ -30,6 +30,11 @@
       <p class="more"><a class="button" href="{{ "/posts/" | relURL }}">記事をもっと見る</a></p>
     {{ else }}<p>まだ記事がありません。</p>{{ end }}
   </section>
+  <aside class="plan-callout">
+    <p class="plan-callout-lead">あなたのお店・イベント情報を掲載しませんか？</p>
+    <p class="plan-callout-sub">記事掲載・PRのご案内（有料プラン）<strong>3,300円/回</strong> から</p>
+    <a class="button" href="{{ "/plan/" | relURL }}">詳しく見る</a>
+  </aside>
   <section class="section">
     <h2 class="section-title">カテゴリーから探す</h2>
     {{ partial "chips.html" (dict "tax" "categories" "items" site.Taxonomies.categories) }}
