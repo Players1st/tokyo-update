@@ -20,7 +20,7 @@
             {{- else }}<div class="thumb-fallback" aria-hidden="true"></div>{{ end }}
           </div>
           <div class="feature-body">
-            <p class="card-meta">{{ partial "badges.html" $first }}<time datetime="{{ $first.Date.Format "2006-01-02" }}">{{ $first.Date.Format "2006年1月2日" }}</time></p>
+            <p class="card-meta">{{ partial "badges.html" $first }}{{ if $first.Params.sponsored }}<span class="pr">PR</span>{{ end }}<time datetime="{{ $first.Date.Format "2006-01-02" }}">{{ $first.Date.Format "2006年1月2日" }}</time></p>
             <h3 class="feature-title">{{ $first.Title }}</h3>
             <p class="card-summary">{{ $first.Summary | plainify | truncate 110 }}</p>
           </div>
@@ -30,6 +30,17 @@
       <p class="more"><a class="button" href="{{ "/posts/" | relURL }}">記事をもっと見る</a></p>
     {{ else }}<p>まだ記事がありません。</p>{{ end }}
   </section>
+  <aside class="plan-callout">
+    <ul class="plan-icons" aria-hidden="true">
+      <li><svg viewBox="0 0 48 48"><path d="M10 20h24v10a10 10 0 0 1-10 10h-4a10 10 0 0 1-10-10z"/><path d="M34 22h3a4 4 0 0 1 0 8h-3"/><path d="M17 8c-2 2 2 4 0 6M24 8c-2 2 2 4 0 6"/></svg><span>飲食</span></li>
+      <li><svg viewBox="0 0 48 48"><path d="M10 16h28l-2 24H12z"/><path d="M17 20v-4a7 7 0 0 1 14 0v4"/></svg><span>ショッピング</span></li>
+      <li><svg viewBox="0 0 48 48"><path d="M8 24 24 10l16 14"/><path d="M13 21v19h22V21"/><path d="M24 36c-5-3.4-6.5-5.4-6.5-7.6a3.4 3.4 0 0 1 6.5-1.4 3.4 3.4 0 0 1 6.5 1.4c0 2.2-1.5 4.2-6.5 7.6z"/></svg><span>暮らし</span></li>
+      <li><svg viewBox="0 0 48 48"><rect x="9" y="12" width="30" height="27" rx="3"/><path d="M9 21h30M17 8v8M31 8v8"/></svg><span>イベント</span></li>
+    </ul>
+    <p class="plan-callout-lead">あなたのお店・イベント情報を掲載しませんか？</p>
+    <p class="plan-callout-sub">記事掲載・PRのご案内（有料プラン）<strong>3,300円/回</strong> から</p>
+    <a class="button" href="{{ "/plan/" | relURL }}">詳しく見る</a>
+  </aside>
   <section class="section">
     <h2 class="section-title">カテゴリーから探す</h2>
     {{ partial "chips.html" (dict "tax" "categories" "items" site.Taxonomies.categories) }}

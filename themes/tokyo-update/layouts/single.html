@@ -20,6 +20,7 @@
       {{ if .Params.sponsored }}<p class="pr-note">この記事は広告（PR）を含みます。</p>{{ end }}
       {{ if ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}<p class="muted">最終更新：{{ .Lastmod.Format "2006年1月2日" }}</p>{{ end }}
     </aside>
+    <aside class="plan-banner"><p>Tokyo Update にあなたのお店やイベント情報を掲載しませんか？</p><a href="{{ "/plan/" | relURL }}">記事掲載・PRのご案内 →</a></aside>
     {{ $ward := .Params.ward }}
     {{ $rel := where (where site.RegularPages "Section" "posts") "Params.ward" $ward }}
     {{ $rel = $rel | complement (slice .) }}
