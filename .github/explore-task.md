@@ -22,6 +22,7 @@ GitHub Actions 上で動いており、人は見ていません。**記事は書
 - **チェーン店・大手企業の店舗・フランチャイズは、すべて除く**（コナミスポーツ、大手ジム・サロン・飲食チェーンなど）。迷うものは、「チェーンの疑いあり」として、一覧には載せるが、理由を書く。
 - 新しく作られた法人が、1〜2店舗だけを運営しているお店は、個人経営と同じに扱う（`independent`）。ただし、`chain_reason` に、運営会社の規模や、店舗数を書く。複数の区・都道府県に店を広げている会社は、`chain_suspected` にする。
 - 情報源として使ってよいもの: お店・団体の公式サイト、プレスリリース（PR TIMES、@Press など）、自治体・商店街・観光協会・商工会議所・区の産業振興のページ、イベントの告知サイト（Peatix など）、メディアの記事、**区ごとの地域ニュースサイト（「〇〇経済新聞」＝みん経など。新店・開業の記事が多い）**。
+- **地域ニュースサイト（みん経）の入口**（URL を直接開く。検索では出てこないことが多い）: 目黒 https://meguro.keizai.biz/ 、下北沢 https://shimokita.keizai.biz/ 、自由が丘 https://jiyugaoka.keizai.biz/ 、渋谷 https://shibuya.keizai.biz/ 、新宿 https://shinjuku.keizai.biz/ 、中野 https://nakano.keizai.biz/ 、高円寺 https://koenji.keizai.biz/ 、池袋 https://ikebukuro.keizai.biz/ 、浅草 https://asakusa.keizai.biz/ 、品川 https://shinagawa.keizai.biz/ 、練馬 https://nerima.keizai.biz/ 、板橋 https://itabashi.keizai.biz/ 、赤坂 https://akasaka.keizai.biz/ 、六本木 https://roppongi.keizai.biz/ 、銀座 https://ginza.keizai.biz/ 、江東 https://koto.keizai.biz/ 。トップページと新着記事の一覧を開き、新店・開業・イベントの記事を探して、**記事本文のページまで開く**。開けなかった URL は、`source_notes` に書く。
 - **食べログ・ホットペッパー・Retty などのグルメ・美容予約サイトは、使わない**（利用規約で、営利・商業目的の利用や転載が禁じられているため）。
 - **Instagram・X などの SNS は、探す場所にしない。** 公式サイトに載っている公式アカウントへのリンクは、情報として記録してよい。
 - ステマ・広告・誇張の強いものは除く。
