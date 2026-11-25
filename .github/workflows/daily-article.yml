@@ -87,6 +87,14 @@ jobs:
             { echo "### 今日は記事を作りませんでした"; echo; echo "$reason"; } >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      # 記事の date / lastmod は、AI に任せず、作成した日時に上書きする（未来の日時だと公開されないため）。
+      # 失敗しても PR は出す（機械チェックと、PR の確認で気づける）。
+      - name: Set post date
+        if: steps.result.outputs.count != '0'
+        run: |
+          dirs=$(python3 -c "import json;print(' '.join('content/posts/'+a['slug'] for a in json.load(open('.work/result.json'))['articles']))")
+          python3 scripts/set_post_date.py $dirs || true
+
       # サムネを作る。GEMINI_API_KEY / GEMINI_IMAGE_MODEL はこの工程にだけ渡す。
       # 失敗しても、記事だけのプルリクエストは出す（PR 本文に「画像なし」と書く）。
       - name: Generate thumbnails
