@@ -16,10 +16,6 @@ on:
   pull_request:
   schedule:
     - cron: "5 22 * * *"
-    # 【試験用・あとで削除】スケジュール実行が動くかの確認（UTC の書き方と、timezone の書き方の両方）
-    - cron: "13,43 * * * *"
-    - cron: "28,58 * * * *"
-      timezone: "Asia/Tokyo"
   workflow_dispatch:
 
 permissions:
@@ -39,10 +35,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Log trigger
-        run: |
-          echo "event=${{ github.event_name }} schedule='${{ github.event.schedule }}'" | tee -a "$GITHUB_STEP_SUMMARY"
-
       - name: Checkout
         uses: actions/checkout@v7
 
