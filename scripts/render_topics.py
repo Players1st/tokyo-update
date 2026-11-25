@@ -43,10 +43,11 @@ def main() -> int:
         if not ts:
             out += ["見つかりませんでした。", ""]
             continue
-        out += ["| 区 | 名前 | 日付 | 場所 | 情報源 | 確認 | チェーン | 記事化 |", "|---|---|---|---|---|---|---|---|"]
+        out += ["| 区 | 名前 | 日付（記事化の目安） | 場所 | 情報源 | 確認 | チェーン | 記事化 |", "|---|---|---|---|---|---|---|---|"]
         for t in ts:
             out.append("| %s | %s<br>%s | %s | %s | [%s](%s) | %s | %s（%s） | %s（%s） |" % (
-                cell(t.get("ward")), cell(t.get("name")), cell(t.get("summary")), cell(t.get("date")),
+                cell(t.get("ward")), cell(t.get("name")), cell(t.get("summary")),
+                cell(t.get("date")) + ("<br>目安: " + cell(t.get("publish_hint")) if t.get("publish_hint") else ""),
                 cell(t.get("place")), cell(t.get("source_type")), cell(t.get("source_url")),
                 "○" if t.get("verified") is True else "×",
                 cell(t.get("chain_check")), cell(t.get("chain_reason")),

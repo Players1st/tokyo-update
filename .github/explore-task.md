@@ -17,10 +17,12 @@ GitHub Actions 上で動いており、人は見ていません。**記事は書
 
 ## 条件
 - 対象は、東京23区内。
-- 時期は、**今日から14日以内に開催・開業するもの、または、直近14日以内に開業・開始したもの**。すでに終わったものは除く。
+- 時期は、**今日から30日以内に開催・開業するもの、または、直近14日以内に開業・開始したもの**。すでに終わったものは除く。
+- 先の日程のものは、記事にするのに向いたタイミング（開催の約2週間前、申し込み開始の日など）を、`publish_hint` に書く。
 - **チェーン店・大手企業の店舗・フランチャイズは、すべて除く**（コナミスポーツ、大手ジム・サロン・飲食チェーンなど）。迷うものは、「チェーンの疑いあり」として、一覧には載せるが、理由を書く。
 - 新しく作られた法人が、1〜2店舗だけを運営しているお店は、個人経営と同じに扱う（`independent`）。ただし、`chain_reason` に、運営会社の規模や、店舗数を書く。複数の区・都道府県に店を広げている会社は、`chain_suspected` にする。
-- 情報源として使ってよいもの: お店・団体の公式サイト、プレスリリース（PR TIMES、@Press など）、自治体・商店街・観光協会のイベントページ、イベントの告知サイト（Peatix など）、メディアの記事。
+- 情報源として使ってよいもの: お店・団体の公式サイト、プレスリリース（PR TIMES、@Press など）、自治体・商店街・観光協会・商工会議所・区の産業振興のページ、イベントの告知サイト（Peatix など）、メディアの記事、**区ごとの地域ニュースサイト（「〇〇経済新聞」＝みん経など。新店・開業の記事が多い）**。
+- **食べログ・ホットペッパー・Retty などのグルメ・美容予約サイトは、使わない**（利用規約で、営利・商業目的の利用や転載が禁じられているため）。
 - **Instagram・X などの SNS は、探す場所にしない。** 公式サイトに載っている公式アカウントへのリンクは、情報として記録してよい。
 - ステマ・広告・誇張の強いものは除く。
 
@@ -41,13 +43,14 @@ GitHub Actions 上で動いており、人は見ていません。**記事は書
    - `source_url`（確認したページ）、`source_type`（`official_site` / `press_release` / `municipal` / `event_site` / `media` / `other`）
    - `verified`（情報源のページを開いて、名前・日付・場所を確かめられたか: `true` / `false`）
    - `chain_check`（`independent` / `chain_suspected` / `chain`）と `chain_reason`（判断の理由。1行）
+   - `publish_hint`（記事にするのに向いたタイミング。先の日程のときだけ）
    - `usable`（記事にできそうか: `yes` / `maybe` / `no`）と `usable_reason`（理由。1行）
 3. 検証のための記録も、残す。
    - `queries`: 試した検索のしかたの一覧（検索語と、ジャンル・区）
    - `source_notes`: 情報源ごとの、使えたか・使えなかったか（例: 「PR TIMES: 個人店は少ない」「Peatix: 取得できず」）
 4. `.work/topics.json` に、次の形で書く。**これだけが成果物です。**
    ```json
-   {"topics": [{"genre": "", "ward": "", "name": "", "summary": "", "date": "", "place": "", "source_url": "", "source_type": "", "verified": true, "chain_check": "", "chain_reason": "", "usable": "", "usable_reason": ""}],
+   {"topics": [{"genre": "", "ward": "", "name": "", "summary": "", "date": "", "place": "", "source_url": "", "source_type": "", "verified": true, "chain_check": "", "chain_reason": "", "usable": "", "usable_reason": "", "publish_hint": ""}],
     "queries": ["..."], "source_notes": ["..."]}
    ```
    - 見つからなかったジャンルや区があっても、無理に埋めない。`source_notes` に、見つからなかったことを書く。
