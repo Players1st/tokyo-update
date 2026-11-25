@@ -64,7 +64,9 @@ def x_post_text(slug: str, fm: dict) -> str:
         t = re.sub(r"[\s#＃]+", "", str(t))
         if t and "#" + t not in hashtags:
             hashtags.append("#" + t)
-    parts = [fm.get("title", slug), "%s/posts/%s/" % (SITE_URL, slug)]
+    # GA で流入を見分けるための UTM パラメータ（campaign は記事のスラッグ）
+    url = "%s/posts/%s/?utm_source=x&utm_medium=social&utm_campaign=%s" % (SITE_URL, slug, slug)
+    parts = [fm.get("title", slug), url]
     if hashtags:
         parts.append(" ".join(hashtags[:n_ward + MAX_HASHTAGS]))
     return "\n\n".join(parts)
