@@ -10,7 +10,7 @@ on:
         description: "ジャンル（all / gourmet / beauty_fitness / food_event / music_event）"
         default: "all"
       ward:
-        description: "区の指定（任意。例: 世田谷区、渋谷区。空なら23区全体）"
+        description: "区の指定（任意。複数ならカンマ区切り。例: 世田谷区,渋谷区,目黒区。空なら23区から5区以上）"
         default: ""
 
 permissions:
@@ -55,7 +55,7 @@ jobs:
             - 区の指定: ${{ inputs.ward || 'なし（23区全体）' }}
           claude_args: >-
             --model ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
-            --max-turns 100
+            --max-turns 150
             --allowedTools "WebSearch,WebFetch,Read,Glob,Grep,Write(.work/**),Edit(.work/**)"
 
       - name: Render result
