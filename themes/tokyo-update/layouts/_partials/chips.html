@@ -1,5 +1,14 @@
-{{- /* 引数: dict "tax" "ward|categories" "items" taxonomy */ -}}
+{{- /* 引数: dict "tax" "ward|categories" "items" taxonomy。区は、重点エリア（params.priorityWards）を先に並べる */ -}}
+{{- $tax := .tax }}
+{{- $all := .items.ByCount }}
+{{- $first := slice }}
+{{- $rest := slice }}
+{{- if eq $tax "ward" }}
+  {{- range site.Params.priorityWards }}{{ $w := . }}{{ range $all }}{{ if eq .Name $w }}{{ $first = $first | append . }}{{ end }}{{ end }}{{ end }}
+{{- end }}
+{{- range $all }}{{ if not (and (eq $tax "ward") (in site.Params.priorityWards .Name)) }}{{ $rest = $rest | append . }}{{ end }}{{ end }}
 <ul class="chips">
-{{ $tax := .tax }}{{ range .items.ByCount }}<li><a class="chip" href="{{ .Page.RelPermalink }}">{{ partial "termlabel.html" (dict "tax" $tax "term" .Page.Data.Term) }}<span class="chip-count">{{ .Count }}</span></a></li>
+{{ range $first }}<li><a class="chip chip-priority" href="{{ .Page.RelPermalink }}">{{ partial "termlabel.html" (dict "tax" $tax "term" .Page.Data.Term) }}<span class="chip-count">{{ .Count }}</span></a></li>
+{{ end }}{{ range $rest }}<li><a class="chip" href="{{ .Page.RelPermalink }}">{{ partial "termlabel.html" (dict "tax" $tax "term" .Page.Data.Term) }}<span class="chip-count">{{ .Count }}</span></a></li>
 {{ end }}
 </ul>

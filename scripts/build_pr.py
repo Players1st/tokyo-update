@@ -66,7 +66,10 @@ def x_post_text(slug: str, fm: dict) -> str:
             hashtags.append("#" + t)
     # GA で流入を見分けるための UTM パラメータ（campaign は記事のスラッグ）
     url = "%s/posts/%s/?utm_source=x&utm_medium=social&utm_campaign=%s" % (SITE_URL, slug, slug)
-    parts = [fm.get("title", slug), url]
+    title = fm.get("title", slug)
+    if fm.get("sponsored") is True:
+        title = "【PR】" + title  # 有料・無料掲載の記事は、X の投稿にも PR と明記する
+    parts = [title, url]
     if hashtags:
         parts.append(" ".join(hashtags[:n_ward + MAX_HASHTAGS]))
     return "\n\n".join(parts)
@@ -112,7 +115,7 @@ def main() -> int:
             lines += [
                 "- **有料掲載（PR）**: 注文 #%s（%s）" % (order.get("issue_number"), order.get("name", "")),
                 "- プラン: %s" % order.get("plan", ""),
-                "- 公開日時: %s（マージ後、この日時の朝の自動ビルドで公開されます）" % order.get("publish_datetime", ""),
+                "- 公開日時: %s（公開日の 7:00 以降に「Build and deploy」を手動実行すると公開されます）" % order.get("publish_datetime", ""),
             ]
         lines.append("")
         checks = unverified_by_slug.get(slug, [])
@@ -147,7 +150,7 @@ def main() -> int:
     else:
         title = "毎朝の記事 %d 本（自動生成）" % len(slugs)
     if order:
-        footer = ["---", "公開してよいと判断したら、マージしてください（公開日時の朝の自動ビルドで公開されます）。",
+        footer = ["---", "公開してよいと判断したら、マージしてください（公開日の 7:00 以降に「Build and deploy」を手動実行すると公開されます）。",
                   "注文の issue: #%s。公開後3日以内の修正は、issue にコメントして、ワークフローを再実行します。" % order.get("issue_number")]
     else:
         footer = ["---", "公開してよいと判断したら、マージしてください（マージで自動公開されます）。"]

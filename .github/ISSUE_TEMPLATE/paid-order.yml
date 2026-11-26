@@ -1,12 +1,12 @@
 name: 有料プランの注文
-description: 有料プランの記事掲載の注文を記録する（入金確認後に作る）
+description: 有料プラン・創刊パートナー枠の掲載の注文を記録する（入金または条件の確認後に作る）
 title: "[有料] 店舗名・団体名 / 公開希望日"
 labels: ["paid-order"]
 body:
   - type: markdown
     attributes:
       value: |
-        入金を確認してから作ってください。このリポジトリは公開なので、**メールアドレス・電話番号などの連絡先は、ここに書かないでください**（連絡先は、メールのやり取りの側にだけ残します）。
+        入金を確認してから作ってください（創刊パートナー枠は、掲載条件への同意を確認してから）。このリポジトリは公開なので、**メールアドレス・電話番号などの連絡先は、ここに書かないでください**（連絡先は、メールのやり取りの側にだけ残します）。
         作ったあと、Actions の「Paid article」を、この issue の番号を指定して実行します。
   - type: input
     id: name
@@ -19,6 +19,7 @@ body:
     attributes:
       label: プラン
       options:
+        - 【先着30店】創刊パートナー枠（初回無料）
         - スポットプラン（3,300円 / 1回）
         - 月額プラン（5,500円 / 月2回まで）
     validations:
@@ -42,7 +43,7 @@ body:
     attributes:
       label: 入金確認
       options:
-        - label: Stripe で入金を確認した
+        - label: Stripe で入金を確認した（創刊パートナー枠は、掲載条件への同意を確認した）
           required: true
   - type: textarea
     id: notes
