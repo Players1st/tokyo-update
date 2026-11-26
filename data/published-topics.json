@@ -61,5 +61,12 @@
     "category": "event_spot",
     "topic": "新豊洲「東京クリスマスマーケット2026」（11/20〜12/25）",
     "slug": "2026-11-26-koto-shintoyosu-christmas-market"
+  },
+  {
+    "date": "2026-11-26",
+    "ward": "setagaya",
+    "category": "event_spot",
+    "topic": "三軒茶屋「三茶縁日 Festival of SANGENJAYA 2026」（11/28・29、駅周辺10会場）",
+    "slug": "2026-11-26-setagaya-sancha-ennichi"
   }
 ]
