@@ -10,6 +10,18 @@
     <p>原稿作成から水彩風サムネイル生成、公式Xでの紹介ポストまでAI編集部がワンストップで対応。伝えたいメモやURLを送るだけで、ご希望日の朝に紹介記事を公開します。</p>
   </section>
 
+  <section class="partner" aria-labelledby="partner-title">
+    <p class="partner-eyebrow">立ち上げ記念・期間限定</p>
+    <h2 class="partner-title" id="partner-title">【先着30店舗限定】創刊パートナー募集（初回1記事・無料掲載）</h2>
+    <p>Tokyo Updateの立ち上げ記念として、東京23区内（特に中野区・杉並区・世田谷区）の個人商店・イベント主催者様を対象に、通常3,300円のスポットPR記事掲載を【初回無料】でご提供いたします。</p>
+    <h3>適用条件</h3>
+    <ol>
+      <li>掲載後、簡単なご感想（一言コメント）をお送りいただけること</li>
+      <li>導入事例として当サイトやSNSでご紹介させていただけること（店名・記事URL）</li>
+    </ol>
+    <p class="partner-cta"><a class="button" href="#apply" data-plan="partner">創刊パートナー枠で申し込む</a></p>
+  </section>
+
   <section class="plan-section">
     <h2 class="section-title">選ばれる3つの特徴</h2>
     <ol class="plan-features">
@@ -42,9 +54,18 @@
     <h2 class="section-title">ご利用の流れ</h2>
     <ol class="plan-steps">
       <li><h3>STEP 1：お申し込みフォーム送信</h3><p>下記フォームより、ご希望プラン・公開希望日・掲載したい情報のメモをお送りください。</p></li>
-      <li><h3>STEP 2：お支払いリンクのご案内</h3><p>内容を確認後、編集部よりメールにて決済用URL（Stripe）をお送りします。</p></li>
-      <li><h3>STEP 3：記事作成・ご希望日の朝に公開</h3><p>ご決済確認後、AI編集部が記事とサムネイルを生成し、ご希望日の朝7:00頃に公開＆公式Xで発信します。</p></li>
+      <li><h3>STEP 2：お支払いリンクのご案内</h3><p>内容を確認後、編集部よりメールにて決済用URL（Stripe）をお送りします。創刊パートナー枠は、お支払いはありません。</p></li>
+      <li><h3>STEP 3：記事作成・ご希望日の朝に公開</h3><p>ご決済の確認後（創刊パートナー枠は内容の確認後）、AI編集部が記事とサムネイルを生成し、ご希望日の朝7:00頃に公開＆公式Xで発信します。</p></li>
     </ol>
+  </section>
+
+  <section class="plan-section">
+    <h2 class="section-title">よくある質問</h2>
+    <div class="plan-faq">
+      <details open><summary>Q. 文章を書くのが苦手ですが大丈夫ですか？</summary><p>A. はい、箇条書きのメモや既存のSNS投稿のURL・チラシ画像をお送りいただくだけで大丈夫です。AIが読者に伝わりやすい紹介記事に構成し、運営者が確認のうえ公開いたします。</p></details>
+      <details open><summary>Q. 掲載後、どのようなメリットがありますか？</summary><p>A. 第三者メディアによる紹介記事URLがWeb上に残り続けるため、お店の公式SNSやGoogleビジネスプロフィール等から「メディアで紹介されました」と発信・リンクして集客にお使いいただけます。また、ご希望日の朝7時に公式X（@tokyoupdatecom）でも同時に告知いたします。</p></details>
+      <details open><summary>Q. 記事に「PR」表記はつきますか？</summary><p>A. はい、景品表示法（ステマ規制）およびメディアの透明性確保のため、記事およびXでの紹介投稿には「PR」表記を明記いたします。</p></details>
+    </div>
   </section>
 
   <section class="plan-section">
@@ -67,14 +88,15 @@
   <section class="plan-section" id="apply">
     <h2 class="section-title">お申し込みフォーム</h2>
     <form class="plan-form" id="plan-form" action="https://formspree.io/f/mdegpbnw" method="POST">
-      <p class="plan-form-note">お預かりした情報は、お申し込みの受付とご連絡のみに使います。送信により、<a href="https://company.p1st.app/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意いただいたものとします。</p>
+      <p class="plan-form-note">お預かりした情報は、お申し込みの受付とご連絡のみに使います。有料プランは、内容の確認後に決済リンクをメールでお送りします。送信により、<a href="https://company.p1st.app/privacy/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意いただいたものとします。</p>
       <label>お名前（店舗名・団体名・ご担当者名）<span class="req">必須</span>
         <input type="text" name="name" required autocomplete="organization"></label>
       <label>メールアドレス（決済リンクの送付先）<span class="req">必須</span>
         <input type="email" name="email" required autocomplete="email"></label>
       <fieldset>
         <legend>ご希望プラン<span class="req">必須</span></legend>
-        <label class="plan-radio"><input type="radio" name="plan" value="スポットプラン（3,300円 / 1回）" required> スポットプラン（3,300円 / 1回）</label>
+        <label class="plan-radio"><input type="radio" name="plan" value="【先着30店】創刊パートナー枠（初回無料）" id="plan-partner" required> 【先着30店】創刊パートナー枠（初回無料）</label>
+        <label class="plan-radio"><input type="radio" name="plan" value="スポットプラン（3,300円 / 1回）"> スポットプラン（3,300円 / 1回）</label>
         <label class="plan-radio"><input type="radio" name="plan" value="月額プラン（5,500円 / 月2回まで）"> 月額プラン（5,500円 / 月2回まで）</label>
       </fieldset>
       <label>公開希望日
@@ -85,7 +107,7 @@
         <textarea name="notes" rows="3"></textarea></label>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
       <p class="plan-form-msg" id="plan-form-msg" role="status" hidden></p>
-      <button class="button plan-submit" type="submit">この内容で掲載を申し込む（決済リンクを受け取る）</button>
+      <button class="button plan-submit" type="submit">この内容で掲載を申し込む</button>
     </form>
     <div class="plan-done" id="plan-done" role="status" hidden>
       <h3>お申し込みを受け付けました</h3>
@@ -95,6 +117,12 @@
   </section>
 </div>
 <script>
+(function(){
+  // 「創刊パートナー枠で申し込む」を押したら、プランを選んだ状態でフォームへ移動する
+  document.querySelectorAll('[data-plan=partner]').forEach(function(a){
+    a.addEventListener('click',function(){ var r=document.getElementById('plan-partner'); if(r) r.checked=true; });
+  });
+})();
 (function(){
   var f=document.getElementById('plan-form'); if(!f||!window.fetch) return;
   var msg=document.getElementById('plan-form-msg'), done=document.getElementById('plan-done'), btn=f.querySelector('button[type=submit]');

@@ -58,4 +58,5 @@ set -a; source .env.local; set +a    # GEMINI_API_KEY（.env.local は git に�
 
 - 記事の指示文は `prompts/article.txt`（土台）と `prompts/sponsored.txt`（有料の追加分）。
 - 月額プランの回数（月2回まで）は、注文 issue を見て、手動で数える。
+- 創刊パートナー枠（先着30店舗、初回無料）の件数も、注文 issue を見て、手動で数える。掲載後の一言コメントの依頼も手動。
 - 公開後3日以内の修正（1回無料）は、現状は手動で対応する（記事を直接直して、PR にする）。

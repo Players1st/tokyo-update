@@ -66,7 +66,10 @@ def x_post_text(slug: str, fm: dict) -> str:
             hashtags.append("#" + t)
     # GA で流入を見分けるための UTM パラメータ（campaign は記事のスラッグ）
     url = "%s/posts/%s/?utm_source=x&utm_medium=social&utm_campaign=%s" % (SITE_URL, slug, slug)
-    parts = [fm.get("title", slug), url]
+    title = fm.get("title", slug)
+    if fm.get("sponsored") is True:
+        title = "【PR】" + title  # 有料・無料掲載の記事は、X の投稿にも PR と明記する
+    parts = [title, url]
     if hashtags:
         parts.append(" ".join(hashtags[:n_ward + MAX_HASHTAGS]))
     return "\n\n".join(parts)

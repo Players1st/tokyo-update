@@ -6,6 +6,10 @@
     <h1 class="hero-title">街の小さな変化を、<br class="sp-only">毎朝のひとことに。</h1>
     <p class="hero-lead">{{ site.Params.description }}</p>
     <p class="hero-about"><span class="hero-about-label">Tokyo Update とは</span>{{ site.Params.about }}</p>
+    <nav class="hero-areas" aria-label="重点エリア">
+      <span class="hero-areas-label">重点エリア</span>
+      {{- range site.Params.priorityWards }}{{ with site.GetPage (printf "/ward/%s" .) }}<a class="chip chip-priority" href="{{ .RelPermalink }}">{{ partial "termlabel.html" (dict "tax" "ward" "term" .Data.Term) }}</a>{{ end }}{{ end }}
+    </nav>
   </div>
 </section>
 <div class="container">
