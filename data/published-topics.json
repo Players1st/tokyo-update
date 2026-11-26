@@ -54,5 +54,12 @@
     "category": "event_spot",
     "topic": "港区役所ロビーコンサート ハンドベル（12/17 12:10〜、無料・申込不要）",
     "slug": "2026-11-26-minato-ward-office-lobby-handbell-concert"
+  },
+  {
+    "date": "2026-11-26",
+    "ward": "koto",
+    "category": "event_spot",
+    "topic": "新豊洲「東京クリスマスマーケット2026」（11/20〜12/25）",
+    "slug": "2026-11-26-koto-shintoyosu-christmas-market"
   }
 ]
