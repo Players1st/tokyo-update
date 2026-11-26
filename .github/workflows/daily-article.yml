@@ -12,7 +12,7 @@ on:
         description: "作る記事の本数"
         default: "1"
       hint:
-        description: "区やテーマの指定（任意。例: 世田谷区、グルメ）"
+        description: "区やテーマの指定（任意。例: 世田谷区、グルメ。空なら重点3区から自動で選ぶ）"
         default: ""
   schedule:
     - cron: "7 19 * * *"
@@ -56,6 +56,18 @@ jobs:
           echo "today=$(date +%Y-%m-%d)" >> "$GITHUB_OUTPUT"
           echo "now=$(date '+%Y-%m-%d %H:%M (JST)')" >> "$GITHUB_OUTPUT"
 
+      # 指定がなければ、重点エリア（hugo.toml の priorityWards）から、記事がいちばん古い区を優先する指定を作る。
+      - name: Pick ward
+        id: ward
+        env:
+          HINT: ${{ inputs.hint }}
+        run: |
+          if [ -n "$HINT" ]; then hint="$HINT"; else hint=$(python3 scripts/pick_ward.py); fi
+          # 改行は除く（出力に別の値が混ざらないように）
+          hint=$(printf '%s' "$hint" | tr '\r\n' '  ')
+          echo "hint=$hint" >> "$GITHUB_OUTPUT"
+          echo "区やテーマの指定: $hint" >> "$GITHUB_STEP_SUMMARY"
+
       # 記事を書く。ANTHROPIC_API_KEY はこの工程にだけ渡す。
       # 使えるツールは、Web 検索・取得と、決まった場所へのファイル書き込みだけ（Bash なし）。
       # show_full_output は使わない（公開リポジトリでは、ログに出たものが誰にでも見えるため）。
@@ -68,7 +80,7 @@ jobs:
             `.github/daily-article-task.md` を読み、その指示どおりに記事を作ってください。
             - 今日の日付と時刻: ${{ steps.prep.outputs.now }}（日付は ${{ steps.prep.outputs.today }}）
             - 作る記事の本数: ${{ inputs.count || '1' }}
-            - 区やテーマの指定: ${{ inputs.hint || 'なし（23区全体から選ぶ）' }}
+            - 区やテーマの指定: ${{ steps.ward.outputs.hint }}
           claude_args: >-
             --model ${{ vars.ANTHROPIC_MODEL || 'claude-sonnet-5-5' }}
             --max-turns 80

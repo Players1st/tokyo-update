@@ -45,6 +45,10 @@ set -a; source .env.local; set +a    # GEMINI_API_KEY（.env.local は git に�
 
 `GEMINI_IMAGE_MODEL` は GitHub の Variables、`GEMINI_API_KEY` は Secrets から読む（コードには書かない）。
 
+## 毎朝の記事の対象エリア
+
+指定なしで実行すると、重点エリア（`hugo.toml` の `priorityWards`。現在は中野区・杉並区・世田谷区）だけを対象にする。3区のうち、記事がいちばん古い区を優先し、題材がなければ次の区に移る（`scripts/pick_ward.py`）。手動実行で「区やテーマの指定」に入力した場合は、その指定が優先される（重点エリアの限定はかからない）。
+
 ## 有料プランの記事（注文から公開まで）
 
 有料プラン（スポット・月額）の記事は、次の流れで作る。無料の毎朝記事（`daily-article.yml`）とは別に、手動で動かす。
