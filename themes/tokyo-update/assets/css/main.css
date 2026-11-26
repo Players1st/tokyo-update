@@ -36,6 +36,9 @@ a{color:var(--accent-dark)}
 .footer-nav{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:center;margin-bottom:12px}
 .footer-nav a{color:var(--ink)}
 .copy{margin:0;font-size:.8rem}
+.footer-operator{margin:0 0 6px}
+.footer-operator a{color:var(--ink)}
+.nav a.nav-plan{color:var(--accent-dark);font-weight:700}
 .footer-x{margin:0 0 14px}
 .footer-notes{margin:0 auto 14px;max-width:46em;font-size:.76rem;line-height:1.7}
 .footer-notes p{margin:0 0 4px}
@@ -128,14 +131,19 @@ a{color:var(--accent-dark)}
 @media (max-width:560px){
   .container{padding:0 16px}
   .sp-only{display:inline}
-  .site-header{position:static}
-  .header-inner{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:6px;gap:4px 12px}
-  .nav{order:3;width:100%;justify-content:center;gap:22px}.nav a{font-size:.84rem}
   .grid,.container-narrow .grid-3{grid-template-columns:1fr}
   .article-title{font-size:1.5rem}
   .feature-title{font-size:1.2rem}.feature-body{padding:18px}
   .hero{padding:36px 0 18px}
 }
+/* ヘッダー: メニューが1段に収まらない幅では、2段目に送る */
+.nav a{white-space:nowrap}
+@media (max-width:720px){
+  .site-header{position:static}
+  .header-inner{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:6px;gap:4px 12px}
+  .nav{order:3;width:100%;justify-content:center;gap:6px 18px;flex-wrap:wrap}.nav a{font-size:.84rem}
+}
+@media (max-width:370px){.nav{gap:6px 10px}.nav a{font-size:.76rem}}
 
 /* 有料プランの案内（/plan/） */
 .plan-hero{margin:8px 0 8px;padding:24px 26px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
