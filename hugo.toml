@@ -17,6 +17,8 @@ category = "categories"
 tag = "tags"
 
 [params]
+operatorName = "株式会社プレイヤーズファースト"
+operatorURL = "https://company.p1st.app/"
 tagline = "東京23区のまち速報"
 xURL = "https://x.com/tokyoupdatecom"
 xHandle = "@tokyoupdatecom"
