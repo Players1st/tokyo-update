@@ -68,5 +68,12 @@
     "category": "event_spot",
     "topic": "三軒茶屋「三茶縁日 Festival of SANGENJAYA 2026」（11/28・29、駅周辺10会場）",
     "slug": "2026-11-26-setagaya-sancha-ennichi"
+  },
+  {
+    "date": "2026-11-27",
+    "ward": "suginami",
+    "category": "event_spot",
+    "topic": "阿佐谷イルミネーション（12/1点灯式、〜2027/1/31、JR阿佐ケ谷駅南口噴水広場ほか）",
+    "slug": "2026-11-27-suginami-asagaya-illumination"
   }
 ]
