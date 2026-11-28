@@ -75,5 +75,12 @@
     "category": "event_spot",
     "topic": "阿佐谷イルミネーション（12/1点灯式、〜2027/1/31、JR阿佐ケ谷駅南口噴水広場ほか）",
     "slug": "2026-11-27-suginami-asagaya-illumination"
+  },
+  {
+    "date": "2026-11-28",
+    "ward": "nakano",
+    "category": "life",
+    "topic": "中野駅西側の新西改札・南北通路などの供用開始（12/6 12時）",
+    "slug": "2026-11-28-nakano-station-west-gate-opening"
   }
 ]
